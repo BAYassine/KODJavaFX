@@ -19,7 +19,7 @@
             <children>
                 <HBox prefHeight="100.0" styleClass="panel-heading">
                     <children>
-                        <Label text="Ajouter un jeux" />
+                        <Label fx:id="headTitle" text="Ajouter un jeux" />
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
@@ -90,7 +90,7 @@
                   <HBox alignment="CENTER_LEFT">
                      <children>
                         <Label prefWidth="200.0" styleClass="form-label" text="Categorie :" />
-                        <ComboBox fx:id="category" prefWidth="150.0" />
+                        <ComboBox fx:id="category" prefWidth="150.0" styleClass="input"/>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" layoutX="40.0" layoutY="156.0">

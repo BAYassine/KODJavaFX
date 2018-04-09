@@ -2,3 +2,6 @@
 /out/
 /*.*
 /src/assets/images/*
+/src/assets/remembered.txt
+/src/Controllers/HeaderController.java
+/src/Core/Config.java

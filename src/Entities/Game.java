@@ -1,7 +1,5 @@
 package Entities;
 
-import javafx.scene.image.Image;
-
 import java.util.Objects;
 
 public class Game {
@@ -14,31 +12,31 @@ public class Game {
     private String url;
     private int age;
     private String device;
-    private Integer categoryId;
+    private Category category;
     private int gender;
 
     public Game(){
 
     }
 
-    public Game(Photo icon, String name, String url, int age, String device, Integer categoryId, int gender) {
+    public Game(Photo icon, String name, String url, int age, String device, Category category, int gender) {
         this.icon = icon;
         this.name = name;
         this.url = url;
         this.age = age;
         this.device = device;
-        this.categoryId = categoryId;
+        this.category = category;
         this.gender = gender;
     }
 
-    public Game(int id, Photo icon, String name, String url, int age, String device, Integer categoryId, int gender) {
+    public Game(int id, Photo icon, String name, String url, int age, String device, Category category, int gender) {
         this.id = id;
         this.icon = icon;
         this.name = name;
         this.url = url;
         this.age = age;
         this.device = device;
-        this.categoryId = categoryId;
+        this.category = category;
         this.gender = gender;
     }
 
@@ -96,12 +94,12 @@ public class Game {
     }
 
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 
@@ -125,13 +123,13 @@ public class Game {
                 Objects.equals(name, that.name) &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(device, that.device) &&
-                Objects.equals(categoryId, that.categoryId);
+                Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, icon, name, url, age, device, categoryId, gender);
+        return Objects.hash(id, icon, name, url, age, device, category, gender);
     }
 
     @Override
@@ -143,7 +141,7 @@ public class Game {
                 ", url='" + url + '\'' +
                 ", age=" + age +
                 ", device='" + device + '\'' +
-                ", categoryId=" + categoryId +
+                ", category=" + category +
                 ", gender=" + gender +
                 '}';
     }

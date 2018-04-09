@@ -1,5 +1,6 @@
 package Services;
 
+import Entities.Category;
 import Entities.ChildGame;
 import Entities.Game;
 import Entities.Photo;
@@ -36,7 +37,7 @@ public class GameService extends Service {
             ps.setString(3, g.getUrl());
             ps.setInt(4, g.getAge());
             ps.setString(5, g.getDevice());
-            ps.setInt(6, g.getCategoryId());
+            ps.setInt(6, g.getCategory().getId());
             ps.setInt(7, g.getGender());
             ps.executeUpdate();
             g.getIcon().moveToServer();
@@ -58,7 +59,7 @@ public class GameService extends Service {
             ps.setString(3, g.getUrl());
             ps.setInt(4, g.getAge());
             ps.setString(5, g.getDevice());
-            ps.setInt(6, g.getCategoryId());
+            ps.setInt(6, g.getCategory().getId());
             ps.setInt(7, g.getGender());
             ps.setInt(8, g.getId());
             ps.executeUpdate();
@@ -80,7 +81,12 @@ public class GameService extends Service {
                 g.setId(rs.getInt("id"));
                 g.setAge(rs.getInt("age"));
                 g.setDevice(rs.getString("device"));
-                g.setCategoryId(rs.getInt("category_id"));
+                int categoryId = rs.getInt("category_id");
+                Category c = null;
+                if(categoryId != 0){
+                    c = new CategoryService().findCategory(categoryId);
+                }
+                g.setCategory(c);
                 g.setGender(rs.getInt("gender"));
                 Integer iconId = rs.getInt("icon_id");
                 Photo icon = null;
@@ -107,7 +113,12 @@ public class GameService extends Service {
                 g.setId(rs.getInt("id"));
                 g.setAge(rs.getInt("age"));
                 g.setDevice(rs.getString("device"));
-                g.setCategoryId(rs.getInt("category_id"));
+                int categoryId = rs.getInt("category_id");
+                Category c = null;
+                if(categoryId != 0){
+                    c = new CategoryService().findCategory(categoryId);
+                }
+                g.setCategory(c);
                 g.setGender(rs.getInt("gender"));
                 Integer iconId = rs.getInt("icon_id");
                 Photo icon = null;
@@ -159,7 +170,12 @@ public class GameService extends Service {
                 g.setId(rs.getInt("gid"));
                 g.setAge(rs.getInt("age"));
                 g.setDevice(rs.getString("device"));
-                g.setCategoryId(rs.getInt("category_id"));
+                int categoryId = rs.getInt("category_id");
+                Category c = null;
+                if(categoryId != 0){
+                    c = new CategoryService().findCategory(categoryId);
+                }
+                g.setCategory(c);
                 g.setGender(rs.getInt("gender"));
                 Integer iconId = rs.getInt("icon_id");
                 Photo icon = null;

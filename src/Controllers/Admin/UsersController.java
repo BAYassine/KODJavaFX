@@ -37,7 +37,6 @@ public class UsersController {
 
             TableColumn<User, String> loginColumn = new TableColumn<>("PSEUDO");
             loginColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-            loginColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
 
             TableColumn<User, Boolean> stateColumn = new TableColumn<>("ETAT");
             stateColumn.setCellValueFactory(new PropertyValueFactory<>("enabled"));

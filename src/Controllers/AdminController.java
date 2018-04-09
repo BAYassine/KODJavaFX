@@ -87,8 +87,10 @@ public class AdminController {
                         break;
                     case "Ajouter un jeu":
                         new GamesController().addGame();
+                        break;
                     case "Liste des chansons":
                         new MusicController().init();
+                        break;
                 }
             });
             sidebar.getChildren().add(treeView);

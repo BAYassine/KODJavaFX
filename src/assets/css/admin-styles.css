@@ -29,13 +29,6 @@
     /*-fx-text-fill: #ec407a;*/
 /*}*/
 
-.sidebar .tree-cell .tree-cell{
-    -fx-indent: 150px;
-    /*-fx-text-fill: #ec407a;*/
-    /*-fx-border-width: 0 0 0 2px;*/
-    /*-fx-border-color: #ec407a;*/
-}
-
 .sidebar .tree-cell:filled:hover, .sidebar .tree-cell:selected:filled{
     -fx-font-size: 14px;
     -fx-background-color: #6059EE;
@@ -48,6 +41,10 @@
 
 .sidebar .tree-cell:selected .glyph-icon, .sidebar .tree-cell:hover .glyph-icon{
     -fx-fill: white;
+}
+
+.sidebar .tree-cell:expanded{
+    -fx-padding: 12px 20px 12px 0;
 }
 
 
@@ -189,6 +186,15 @@
 
 .btn-success:hover{
     -fx-background-color: #016910;
+}
+
+.btn-danger{
+    -fx-background-color: #ff0018;
+    -fx-text-fill: white;
+}
+
+.btn-danger:hover{
+    -fx-background-color: #cc0013;
 }
 
 .paginator .button{
