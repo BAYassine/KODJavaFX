@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class PlanetController {
-
     protected String bgPath;
     protected String titleText;
     protected String subTitleText;

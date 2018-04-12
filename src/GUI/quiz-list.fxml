@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane style="-fx-background-color: white;" styleClass="planet-list" stylesheets="@../assets/css/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox fx:id="container" alignment="CENTER" spacing="30.0">
+            <children>
+                <Label fx:id="title" style="-fx-text-fill: black;" styleClass="section-title" text="T E S T E Z   V O T R E   I N T E L L I G E N C E" />
+            </children>
+            <padding>
+                <Insets bottom="50.0" left="100.0" right="100.0" top="100.0" />
+            </padding>
+        </VBox>
+    </content>
+</ScrollPane>

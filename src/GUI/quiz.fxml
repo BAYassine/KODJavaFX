@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="planet-list" stylesheets="@../assets/css/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: white;">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label>
+                     <graphic>
+                        <MaterialDesignIconView glyphName="HELP" rotate="180.0" size="50" style="-fx-fill: #84bed6;" styleClass="material">
+                           <rotationAxis>
+                              <Point3D y="1.0" />
+                           </rotationAxis>
+                        </MaterialDesignIconView>
+                     </graphic>
+                  </Label>
+                  <Label fx:id="title" styleClass="section-title" text="Label" />
+                  <Label>
+                     <graphic>
+                        <MaterialDesignIconView glyphName="HELP" size="50" style="-fx-fill: #84bed6;" styleClass="material" />
+                     </graphic>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox>
+               <children>
+                  <StackPane fx:id="slider" />
+               </children>
+            </VBox>
+            <ProgressBar fx:id="progress" prefWidth="600.0" progress="0" />
+            <Button fx:id="endBtn" minHeight="0.0" mnemonicParsing="false" prefHeight="0.0" text="TERMINER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-success" />
+                  <String fx:value="btn-lg" />
+               </styleClass>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="loginbox" />
+            <String fx:value="bdr-color-1" />
+         </styleClass>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" />
+         </padding>
+      </VBox>
+      <VBox fx:id="scorebox" alignment="CENTER" maxHeight="300.0" maxWidth="700.0" opacity="0.0" pickOnBounds="false" prefHeight="300.0" prefWidth="500.0" styleClass="loginbox">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <ImageView fx:id="scoreImage" fitHeight="150.0" fitWidth="150.0" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" right="50.0" top="20.0" />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@../assets/images/great-job.jpg" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" pickOnBounds="false">
+                     <children>
+                        <Label fx:id="message" pickOnBounds="false" style="-fx-font-size: 40px;" text="Bien Joué !" textFill="WHITE" />
+                        <Label fx:id="score" pickOnBounds="false" style="-fx-font-size: 25px;" text="Votre score est : " textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Button fx:id="quitBtn" mnemonicParsing="false" pickOnBounds="false" text="Quitter">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-default" />
+               </styleClass>
+            </Button>
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+         <padding>
+            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+   </padding>
+</StackPane>

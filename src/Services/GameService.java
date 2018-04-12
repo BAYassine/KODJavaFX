@@ -6,8 +6,12 @@ import Entities.Game;
 import Entities.Photo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.XYChart;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class GameService extends Service {
@@ -104,33 +108,61 @@ public class GameService extends Service {
 
     public ObservableList<Game> findAll(){
         String sql = "SELECT * FROM game LIMIT 30";
+        ObservableList<Game> games = null;
+        try {
+            games = getList(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return games;
+    }
+
+    public ObservableList<Game> findAllowedGames(int childId){
+        String blocked_games = "";
+        String sql = "SELECT * FROM game ";
         ObservableList<Game> games = FXCollections.observableArrayList();
         try {
             Statement stm = connection.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
-            while(rs.next()){
-                Game g = new Game();
-                g.setId(rs.getInt("id"));
-                g.setAge(rs.getInt("age"));
-                g.setDevice(rs.getString("device"));
-                int categoryId = rs.getInt("category_id");
-                Category c = null;
-                if(categoryId != 0){
-                    c = new CategoryService().findCategory(categoryId);
-                }
-                g.setCategory(c);
-                g.setGender(rs.getInt("gender"));
-                Integer iconId = rs.getInt("icon_id");
-                Photo icon = null;
-                if (iconId != 0)
-                    icon = new PhotoService().findImage(iconId);
-                g.setIcon(icon);
-                g.setName(rs.getString("name"));
-                g.setUrl(rs.getString("url"));
-                games.add(g);
+            ResultSet rs = stm.executeQuery("SELECT  blocked_g FROM child WHERE child.id = "+ childId);
+            while (rs.next()){
+                blocked_games = rs.getString(1);
             }
+            if (blocked_games != ""){
+                String sqlBlocked = "WHERE id NOT IN (" + blocked_games + ") ";
+                sql += sqlBlocked;
+            }
+            sql += "LIMIT 30";
+            games = getList(sql);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return games;
+    }
+
+    private ObservableList<Game> getList(String sql) throws SQLException{
+        ObservableList<Game> games = FXCollections.observableArrayList();
+        Statement stm = this.connection.createStatement();
+        ResultSet rs = stm.executeQuery(sql);
+        while(rs.next()){
+            Game g = new Game();
+            g.setId(rs.getInt("id"));
+            g.setAge(rs.getInt("age"));
+            g.setDevice(rs.getString("device"));
+            int categoryId = rs.getInt("category_id");
+            Category c = null;
+            if(categoryId != 0){
+                c = new CategoryService().findCategory(categoryId);
+            }
+            g.setCategory(c);
+            g.setGender(rs.getInt("gender"));
+            Integer iconId = rs.getInt("icon_id");
+            Photo icon = null;
+            if (iconId != 0)
+                icon = new PhotoService().findImage(iconId);
+            g.setIcon(icon);
+            g.setName(rs.getString("name"));
+            g.setUrl(rs.getString("url"));
+            games.add(g);
         }
         return games;
     }
@@ -138,18 +170,7 @@ public class GameService extends Service {
     public void saveGame(int childId, int gameId, long time) {
         String sql = "INSERT INTO child_game (child_id, game_id, date, duration)" +
                 "  VALUES (?, ?, ? ,?)";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, childId);
-            ps.setInt(2, gameId);
-            java.util.Date current = new java.util.Date();
-            ps.setDate(3, new Date(current.getTime()));
-            TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
-            ps.setTime(4, new Time(time));
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        this.saveAction(childId, gameId, time, sql);
     }
 
     public ObservableList<ChildGame> getRecent(int childId){
@@ -193,4 +214,81 @@ public class GameService extends Service {
         }
         return childGames;
     }
+
+    public void blockGame(int childId, int gameId){
+        String sql = "Update child SET blocked_g = ? WHERE child.id = ?";
+        try {
+            String blocked_games = getBlockedGames(childId);
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            if (blocked_games != "")
+                ps.setString(1, blocked_games +","+ gameId);
+            else ps.setString(1, gameId + "");
+            ps.setInt(2, childId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getBlockedGames(int id) {
+        String blocked_games = "";
+        try {
+            Statement stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT  blocked_g FROM child WHERE child.id = " + id);
+            blocked_games = null;
+            while (rs.next()) {
+                blocked_games = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return blocked_games;
+    }
+
+    public HashMap<String, Integer> getPlayingStats(int childId){
+        String sql = "SELECT child_id, SUM(time_to_sec(duration)) as total, date(child_game.date) as date " +
+                "FROM `child_game`\n" +
+                "GROUP BY date(child_game.date)" +
+                "HAVING child_id = " + childId +
+                " LIMIT 7";
+        HashMap<String, Integer> stats = new HashMap<>();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()){
+                stats.put(rs.getDate("date").toString(), rs.getInt("total"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stats;
+    }
+
+
+    public long getTotalTime(int childId){
+        String sql = "SELECT SUM(time_to_sec(duration)) AS time, child_id " +
+                "FROM child_game " +
+                "GROUP BY child_id " +
+                "HAVING child_id = "+ childId ;
+        long time = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                time = rs.getInt("time");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+//
+//
+//    public XYChart.Series<String, Integer> getTimeStats(){
+//        String sqlGame = "SELECT child_id, SUM(time_to_sec(duration)) FROM child_game\n" +
+//                "GROUP BY child_id" +
+//                "HAVING child_id = 2";
+//    }
+//
+
 }

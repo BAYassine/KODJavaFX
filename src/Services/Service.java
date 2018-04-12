@@ -2,9 +2,8 @@ package Services;
 
 import Core.DBConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.TimeZone;
 
 public class Service {
 
@@ -21,7 +20,23 @@ public class Service {
             PreparedStatement ps = this.connection.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Le " + tablename + " a été supprimé");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void saveAction(int childId, int actionId, long time, String sql) {
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setInt(1, childId);
+            ps.setInt(2, actionId);
+            java.util.Date current = new java.util.Date();
+            ps.setDate(3, new Date(current.getTime()));
+            TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+            ps.setTime(4, new Time(time));
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

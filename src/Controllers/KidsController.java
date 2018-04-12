@@ -3,15 +3,16 @@ package Controllers;
 import Core.Main;
 import Entities.Child;
 import Entities.ChildGame;
-import Entities.Game;
 import Entities.Photo;
-import Services.ChildService;
-import Services.GameService;
-import Services.PhotoService;
+import Services.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.*;
 
 public class KidsController {
 
@@ -63,12 +65,14 @@ public class KidsController {
             list.setVgap(30);
             list.setPadding(new Insets(10));
             for (int i = 0; i < mykids.size(); i++) {
-                for (int j = i; j < 2 && j+i*2 < mykids.size(); j++) {
+                for (int j = 0; j < 2 && j+i*2 < mykids.size(); j++) {
                     card = FXMLLoader.load(getClass().getResource("/GUI/ChildCard.fxml"));
                     image = (ImageView) card.getChildren().get(0);
                     Photo img = is.findImage(mykids.get(j+i*2).getPhotoId());
                     image.setImage(new Image(img.getWebPath()));
                     VBox right = (VBox) card.getChildren().get(1);
+                    int color = mykids.get(j+i*2).getGender()? 4 : 3 ;
+                    right.getStyleClass().add("bg-color+" + color);
                     name = (Label) right.getChildren().get(0);
                     name.setText(mykids.get(j+i*2).getName());
                     age = (Label) right.getChildren().get(1);
@@ -99,19 +103,22 @@ public class KidsController {
         try {
             center = FXMLLoader.load(getClass().getResource("/GUI/child-activity.fxml"));
             center.setFitToHeight(true);
-//            Barchbarchart("Unit Sales Q2 2016", CategoryAxis(), NumberAxis()) {
-//                series("Product X") {
-//                    data("MAR", 10245)
-//                    data("APR", 23963)
-//                    data("MAY", 15038)
-//                }
-//                series("Product Y") {
-//                    data("MAR", 28443)
-//                    data("APR", 22845)
-//                    data("MAY", 19045)
-//                }
-//            }
+            HashMap<String, Integer> stats = new GameService().getPlayingStats(child.getId());
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
+            for (Map.Entry<String, Integer> entry : stats.entrySet()) {
+                String tmpString = entry.getKey();
+                int tmpValue = entry.getValue();
+                XYChart.Data<String, Integer> d = new XYChart.Data<>(tmpString, tmpValue);
+                series.getData().add(d);
+            }
+            BarChart<String,Integer> bc = (BarChart<String, Integer>) center.getContent().lookup("#barChart");
+
+            bc.getData().add(series);
             VBox gameList = (VBox) center.getContent().lookup("#gameList");
+            HashSet<Integer> ids = new HashSet<>();
+            for (String s : new GameService().getBlockedGames(child.getId()).split(",")){
+                ids.add(Integer.parseInt(s));
+            }
             ObservableList<ChildGame> recent = new GameService().getRecent(child.getId());
             for(int i = 0; i< recent.size(); i++){
                 ChildGame cg = recent.get(i);
@@ -126,7 +133,36 @@ public class KidsController {
                 Label duration = (Label) game.lookup("#duration");
                 duration.setText(duration.getText() + " " + cg.getDuration().toString());
                 gameList.getChildren().add(game);
+                Button banBtn = (Button) game.lookup("#banBtn");
+                if (ids.contains(cg.getGame().getId())){
+                    banBtn.setDisable(true);
+                }
+                else {
+                    banBtn.setOnAction(e -> {
+                        new GameService().blockGame(child.getId(), cg.getGame().getId());
+                        banBtn.setDisable(true);
+                    });
+                }
             }
+
+            long total = 0;
+            long totalQ = new QuizService().getTotalTime(child.getId()); total+= totalQ;
+            long totalV = new CartoonService().getTotalTime(child.getId()); total+=totalV;
+            long totalG = new GameService().getTotalTime(child.getId()); total+=totalG;
+
+            System.out.println(totalG);
+            System.out.println(totalV);
+            System.out.println(totalQ);
+
+            ObservableList<PieChart.Data> pieChartData =
+                    FXCollections.observableArrayList(
+                            new PieChart.Data("Jeux", (int) ((double)totalG/total) * 100),
+                            new PieChart.Data("Dessins animés", (int) ((double)totalV/total) * 100),
+                            new PieChart.Data("Quizes", total-( ((int) (double)totalG/total * 100) + ((int) ((double)totalV/total) * 100)))
+                    );
+            final PieChart chart = (PieChart) center.getContent().lookup("#pieChart");
+            chart.setData(pieChartData);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

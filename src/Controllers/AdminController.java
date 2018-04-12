@@ -7,6 +7,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -27,6 +28,9 @@ public class AdminController {
             layer = FXMLLoader.load(getClass().getResource("/GUI/admin.fxml"));
             ScrollPane navigator = (ScrollPane) layer.getChildren().get(0);
             ScrollPane rightPane = (ScrollPane) layer.getChildren().get(1);
+            Button homeBtn = (Button) navigator.getContent().lookup("#home");
+            HBox finalLayer = layer;
+            homeBtn.setOnAction(e -> Main.sp.getChildren().remove(finalLayer));
             container = (Pane) rightPane.getContent().lookup("#content");
             VBox sidebar = (VBox) navigator.getContent().lookup("#sidebar");
             HBox header = (HBox) rightPane.getContent().lookup("#header");
@@ -35,7 +39,7 @@ public class AdminController {
 
             treeView = new TreeView<>();
             TreeItem<String> dashboard = new TreeItem<>("Dashboard");
-            TreeItem<String> users = new TreeItem<>("Utilisateurs");
+            TreeItem<String> users = new TreeItem<>("Gestion des Membres");
             FontAwesomeIconView fa = new FontAwesomeIconView(FontAwesomeIcon.USERS);
             users.setGraphic(fa);
 
@@ -51,15 +55,19 @@ public class AdminController {
             users.getChildren().addAll(listUsers, addUser);
             users.setExpanded(true);
 
-            TreeItem<String> games = new TreeItem<>("Liste des jeux");
-            fa = new FontAwesomeIconView(FontAwesomeIcon.GAMEPAD);
-            games.setGraphic(fa);
-            games.setExpanded(true);
+            TreeItem<String> listGames = new TreeItem<>("Liste des jeux");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.LIST);
+            listGames.setGraphic(fa);
 
             TreeItem<String> addGame = new TreeItem<>("Ajouter un jeu");
             fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
             addGame.setGraphic(fa);
-            games.getChildren().add(addGame);
+
+            TreeItem<String> games = new TreeItem<>("Gestion des jeux");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.GAMEPAD);
+            games.setGraphic(fa);
+            games.setExpanded(true);
+            games.getChildren().addAll(listGames, addGame);
 
             TreeItem<String> songs = new TreeItem<>("Liste des chansons");
             fa = new FontAwesomeIconView(FontAwesomeIcon.MUSIC);

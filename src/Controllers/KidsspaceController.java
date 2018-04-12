@@ -1,6 +1,7 @@
 package Controllers;
 
 import Core.Main;
+import Entities.Cartoon;
 import Entities.Child;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -33,6 +34,10 @@ public class KidsspaceController {
     public Button menuToggle;
     public MaterialDesignIconView menuIcon;
     public Button quizBtn;
+
+    public static boolean isWatching;
+    public static boolean isPlaying;
+    public static boolean isDancing;
 
     private static StackPane space = null;
     private static StackPane backLayer = null;
@@ -73,12 +78,15 @@ public class KidsspaceController {
             gameBtn.setTranslateX(menuToggle.getTranslateX());
             gameBtn.setTranslateY(0);
             gameBtn.setScaleX(0);gameBtn.setScaleY(0);
+
             musicBtn.setTranslateX(menuToggle.getTranslateX());
             musicBtn.setTranslateY(0);
             musicBtn.setScaleX(0);musicBtn.setScaleY(0);
+
             quizBtn.setTranslateX(menuToggle.getTranslateX());
             quizBtn.setTranslateY(0);
             quizBtn.setScaleX(0);quizBtn.setScaleY(0);
+
             cartoonBtn.setTranslateX(menuToggle.getTranslateX());
             cartoonBtn.setTranslateY(0);
             cartoonBtn.setScaleX(0);cartoonBtn.setScaleY(0);
@@ -97,6 +105,10 @@ public class KidsspaceController {
             cartoonBtn.setOnAction(e -> {
                 toggleMenu();
                 new CartoonController().showPlanet(centerLayer);
+            });
+            quizBtn.setOnAction(e -> {
+                toggleMenu();
+                new QuizController().showPlanet(centerLayer);
             });
 //            gameBtn.setOnAction(e -> new GameController().showPlanet(backpane));
             exitBtn.setTranslateX(- Main.scene.getWidth()/2);
@@ -118,6 +130,12 @@ public class KidsspaceController {
     }
 
     private void exitSpace() {
+        if (isPlaying)
+            GameController.clearTraces();
+        if (isWatching)
+            CartoonController.clearTraces();
+        if (isDancing)
+            MusicController.clearTraces();
         child = null;
         Main.sp.getChildren().remove(space);
         Main.window.setFullScreen(false);

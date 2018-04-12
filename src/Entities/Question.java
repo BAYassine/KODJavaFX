@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Question {
@@ -7,6 +9,11 @@ public class Question {
     private Integer quizId;
     private String content;
 
+    private List<Answer> answerList;
+
+    public Question() {
+        answerList = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -48,5 +55,9 @@ public class Question {
     public int hashCode() {
 
         return Objects.hash(id, quizId, content);
+    }
+
+    public List<Answer> getAnswerList() {
+        return answerList;
     }
 }

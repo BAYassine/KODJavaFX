@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.util.TimeZone;
 
 public class CartoonService extends Service {
 
@@ -23,7 +24,6 @@ public class CartoonService extends Service {
             ps.setInt(5, c.getEpisodesCnt());
             ps.setInt(6, c.getGender());
             ps.executeUpdate();
-            System.out.println("Le cartoon a été ajouté avec succes");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,4 +126,30 @@ public class CartoonService extends Service {
             }
             return episodes;
     }
+
+    public void saveCartoon(int childId, int videoId, long time) {
+        String sql = "INSERT INTO child_video (child_id, video_id, date, duration)" +
+                "  VALUES (?, ?, ? ,?)";
+        saveAction(childId, videoId, time, sql);
+    }
+
+
+    public long getTotalTime(int childId){
+        String sql = "SELECT SUM(time_to_sec(duration)) AS time, child_id " +
+                "FROM child_video " +
+                "GROUP BY child_id " +
+                "HAVING child_id = "+ childId ;
+        long time = 0;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                time = rs.getInt("time");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
+
 }

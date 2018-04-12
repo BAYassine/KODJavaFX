@@ -27,6 +27,10 @@ public class GameController extends PlanetController{
     public ImageView image;
     public Label name;
     public VBox listContainer;
+    private static WebView wv;
+    private static int currentGameId;
+    private static long start;
+    private static StackPane content;
 
     public GameController() {
         this.bgPath = "/assets/images/games-planet.jpg";
@@ -42,7 +46,7 @@ public class GameController extends PlanetController{
             content = FXMLLoader.load(getClass().getResource("/GUI/game-list.fxml"));
             content.setMaxWidth(Main.scene.getWidth());
             ScrollPane sp2 = (ScrollPane) content.getChildren().get(1);
-            ObservableList<Game> games = new GameService().findAll();
+            ObservableList<Game> games = new GameService().findAllowedGames(KidsspaceController.getChild().getId());
             VBox listContainer = (VBox) sp2.getContent();
             gameList =  new GridPane();
             ColumnConstraints cc = new ColumnConstraints();
@@ -68,7 +72,6 @@ public class GameController extends PlanetController{
                     overlay.widthProperty().bind(gameList.widthProperty().divide(4).subtract(30));
                     Label name = (Label) card.lookup("#name");
                     name.setText(g.getName());
-                    int finalJ = j;
                     Random random = new Random();
                     card.getStyleClass().add("bg-color-" + (random.nextInt(5)+1));
                     gameList.add(card, j, i);
@@ -89,47 +92,37 @@ public class GameController extends PlanetController{
     }
 
     public void showGame(Game g) {
-        StackPane content = null;
-        long start = System.currentTimeMillis();
+        KidsspaceController.isPlaying = true;
+        start = System.currentTimeMillis();
+        currentGameId = g.getId();
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/play-game.fxml"));
             content.setMaxHeight(Main.scene.getHeight());
             content.setMaxWidth(Main.scene.getWidth());
-            WebView wv = (WebView) content.lookup("#webView");
+            wv = (WebView) content.lookup("#webView");
             wv.setPrefHeight(Main.scene.getHeight()-200);
             wv.setPrefWidth(Main.scene.getWidth());
             wv.setMaxHeight(Main.scene.getHeight()-200);
             Button closeBtn = (Button) content.lookup("#closeBtn");
             closeBtn.setTranslateX(Main.scene.getWidth()/2);
             closeBtn.setTranslateY(- Main.scene.getHeight()/2);
-            StackPane finalContent = content;
             WebEngine engine = wv.getEngine();
             engine.load(g.getUrl());
-            closeBtn.setOnAction(e -> {
-                new GameService().saveGame(
-                        KidsspaceController.getChild().getId(),
-                        g.getId(),
-                        System.currentTimeMillis() - start
-                );
-                GameController.planet.getChildren().remove(finalContent);
-                engine.load("");
-            });
+            closeBtn.setOnAction(e -> clearTraces());
         } catch (IOException e) {
             e.printStackTrace();
         }
         GameController.planet.getChildren().add(content);
     }
 
-    public void updateGame(int id) {
-
-        GameService gs = new GameService();
-        Game g = gs.findGame(id);
-        g.setName("new game");
-        gs.updateGame(g);
-        g = gs.findGame(id);
-    }
-
-    private Double ColumnMaxWidth( double parentW , int columnCount, double spacing ){
-        return (parentW - spacing * (columnCount-1))/columnCount;
+    public static void clearTraces(){
+        KidsspaceController.isPlaying = false;
+        new GameService().saveGame(
+                KidsspaceController.getChild().getId(),
+                currentGameId,
+                System.currentTimeMillis() - start
+        );
+        GameController.planet.getChildren().remove(content);
+        wv.getEngine().load("");
     }
 }

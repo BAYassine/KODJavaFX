@@ -4,6 +4,7 @@ import Controllers.HeaderController;
 import Controllers.IndexController;
 import Core.Exceptions.EmailInvalidException;
 import Entities.User;
+import Services.GameService;
 import Services.UserService;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;

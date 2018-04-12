@@ -78,6 +78,11 @@ public class VideoService  extends Service {
         return getList(sql);
     }
 
+    public ObservableList<Video> findCourses(){
+        String sql = "SELECT * FROM video Where cartoon_id IS NULL";
+        return getList(sql);
+    }
+
 
     public ObservableList<Video> findEpisodes(int id) {
         String sql = "SELECT * FROM video WHERE cartoon_id = " + id;
@@ -104,5 +109,10 @@ public class VideoService  extends Service {
             e.printStackTrace();
         }
         return videos;
+    }
+
+    public ObservableList<Video> findCoursesByCat(int id) {
+        String sql = "SELECT * FROM video WHERE category_id = " + id;
+        return getList(sql);
     }
 }

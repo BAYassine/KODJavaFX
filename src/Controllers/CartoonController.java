@@ -4,6 +4,7 @@ import Core.Main;
 import Entities.Cartoon;
 import Entities.Video;
 import Services.CartoonService;
+import Services.GameService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -12,10 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
@@ -24,6 +22,12 @@ import java.io.IOException;
 import java.util.Random;
 
 public class CartoonController extends PlanetController{
+
+    private static int currentEpisodeId;
+    private static long start;
+    private static ScrollPane content;
+    private static FlowPane player;
+    private static WebView wv;
 
     public CartoonController() {
         this.bgPath = "/assets/images/games-planet.jpg";
@@ -34,7 +38,7 @@ public class CartoonController extends PlanetController{
     }
 
     private void openPlanet() {
-        ScrollPane content = null;
+        content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/cartoon-list.fxml"));
             content.setMaxWidth(Main.scene.getWidth());
@@ -67,7 +71,6 @@ public class CartoonController extends PlanetController{
                     Label episodes = (Label) card.lookup("#episodes");
                     name.setText(cartoon.getName());
                     episodes.setText(cartoon.getEpisodesCnt() + " episodes");
-                    int finalJ = j;
                     Random random = new Random();
                     card.getStyleClass().add("bg-color-" + (random.nextInt(5)+1));
                     cartoonList.add(card, j, i);
@@ -129,15 +132,14 @@ public class CartoonController extends PlanetController{
                     gridPane.add(b, j, i);
                 }
             }
+            
             VBox details = (VBox) content.lookup("#infosBox");
             Button closeBtn = (Button) content.lookup("#closeBtn");
             closeBtn.setTranslateX(Main.scene.getWidth()/2);
             closeBtn.setTranslateY(- Main.scene.getHeight()/2);
 
             StackPane finalContent = content;
-            closeBtn.setOnAction(e -> {
-                GameController.planet.getChildren().remove(finalContent);
-            });
+            closeBtn.setOnAction(e -> GameController.planet.getChildren().remove(finalContent));
             details.getChildren().add(gridPane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -146,20 +148,41 @@ public class CartoonController extends PlanetController{
     }
 
     private void playEpisode(Video v) {
+        KidsspaceController.isWatching = true;
+        player = null;
         try {
-            VBox player = FXMLLoader.load(getClass().getResource("/GUI/video-player.fxml"));
-            WebView wv = (WebView) player.lookup("#browser");
+            player = FXMLLoader.load(getClass().getResource("/GUI/video-player.fxml"));
+            start = System.currentTimeMillis();
+            currentEpisodeId = v.getId();
+            wv = (WebView) player.lookup("#browser");
             Button close = (Button) player.lookup("#close");
             wv.getEngine().load(v.getUrl());
             close.setOnAction(e -> {
+                KidsspaceController.isWatching = true;
                 CartoonController.planet.getChildren().remove(player);
                 wv.getEngine().load("");
+                new CartoonService().saveCartoon(
+                    KidsspaceController.getChild().getId(),
+                    v.getId(),
+                    System.currentTimeMillis() - start
+                );
             });
-            CartoonController.planet.getChildren().add(player);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        CartoonController.planet.getChildren().add(player);
+    }
 
+
+    public static void clearTraces(){
+        KidsspaceController.isWatching = false;
+        new GameService().saveGame(
+            KidsspaceController.getChild().getId(),
+            currentEpisodeId,
+            System.currentTimeMillis() - start
+        );
+        CartoonController.planet.getChildren().remove(player);
+        wv.getEngine().load("");
     }
 
 //    public void updateCartoon(int id) {

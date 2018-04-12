@@ -24,7 +24,7 @@ public class MusicController extends PlanetController{
     private int current_song = 0;
     private ObservableList<Music> songs;
 
-    private MediaPlayer mediaPlayer;
+    private static MediaPlayer mediaPlayer;
     private StackPane content;
     private Button play;
     private boolean playing = false;
@@ -171,7 +171,8 @@ public class MusicController extends PlanetController{
         System.out.print(c);
     }
 
-    public void closePlanet(){
+
+    public static void clearTraces() {
         mediaPlayer.stop();
     }
 }

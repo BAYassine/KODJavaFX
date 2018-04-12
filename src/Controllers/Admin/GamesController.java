@@ -28,6 +28,7 @@ public class GamesController {
     private File image = null;
 
     public void init() {
+        AdminController.treeView.getSelectionModel().select(4);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/Admin/games-list.fxml"));
@@ -158,7 +159,7 @@ public class GamesController {
     }
 
     private void updateGame(Integer id) {
-        AdminController.treeView.getSelectionModel().select(5);
+        AdminController.treeView.getSelectionModel().select(4);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-game.fxml"));
@@ -207,17 +208,21 @@ public class GamesController {
                 selectedGender = 1;
             int finalSelectedGender = selectedGender;
             save.setOnAction(e -> {
-                Photo imageFile = new Photo(image);
-                g.setIcon(imageFile);
+                if (image != null)
+                {
+                    Photo imageFile = new Photo(image);
+                    g.setIcon(imageFile);
+                }
+                else g.setIcon(null);
                 g.setName(name.getText());
                 g.setUrl(url.getText());
                 g.setAge(age.getSelectionModel().getSelectedIndex());
                 g.setDevice(devs);
                 g.setCategory(category.getSelectionModel().getSelectedItem());
                 g.setGender(finalSelectedGender
-                );
-                new GameService().addGame(g);
-                init();
+            );
+            new GameService().addGame(g);
+            init();
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -227,7 +232,7 @@ public class GamesController {
     }
 
     public void addGame() {
-        AdminController.treeView.getSelectionModel().select(5);
+        AdminController.treeView.getSelectionModel().select(4);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-game.fxml"));
