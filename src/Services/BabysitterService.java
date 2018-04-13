@@ -190,5 +190,30 @@ public class BabysitterService extends Service {
             e.printStackTrace();
         }
     }
+  
+   public void updateState(Babysitter c) {
+      
+          String sql
+                  = "UPDATE babysitter "
+                  + "SET state=? "
+                  + "WHERE babysitter.id = ?";
+          
+          
+          try {
+              PreparedStatement ps = this.connection.prepareStatement(sql);
+              ps.setString(1, c.getState());
+              ps.setInt(2, c.getId());
+              ps.executeUpdate();
+              
+              
+          } catch (SQLException ex) {
+              Logger.getLogger(ArticleService.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          
+       
+    }
+  
+  
+  
 
 }

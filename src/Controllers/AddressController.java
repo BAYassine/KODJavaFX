@@ -83,14 +83,14 @@ public class AddressController {
                 image.setImage(new Image(img.getWebPath()));
 
                 name = (Label) card.getChildren().get(1);
-                name.setText(addresses.get(j + i * 2).getName());
+                name.setText("Nom:" +addresses.get(j + i * 2).getName());
                 phone = (Label) card.getChildren().get(2);
-                phone.setText(addresses.get(j + i * 2).getPhone());
+                phone.setText("Telephone: "+ addresses.get(j + i * 2).getPhone());
                 description = (Label) card.getChildren().get(2);
 
                 description.setText(addresses.get(j + i * 2).getDescription().replace("<.*>", " "));
                 location = (Label) card.getChildren().get(3);
-                location.setText(addresses.get(i * 2 + j).getLocation());
+                location.setText("Adresse: "+ addresses.get(i * 2 + j).getLocation());
                 Button more = (Button) card.lookup("#more");
                 int finalI = i;
                 System.out.println(a.getId());
@@ -132,16 +132,16 @@ public class AddressController {
             Label location = (Label) body.lookup("#location");
             Label phone = (Label) body.lookup("#phone");
             name.setText(addresses.get(0).getName());
-            location.setText(addresses.get(0).getLocation());
-            phone.setText(addresses.get(0).getPhone());
+            location.setText("Adresse:" +addresses.get(0).getLocation());
+            phone.setText("Telephone" +addresses.get(0).getPhone());
             ObservableList<Category> categories = cv.findCategory("Adresse");
             ListView<Category> categories_container = new ListView<Category>();
             categories_container = (ListView) body.lookup("#categories");
             categories_container.setItems(categories);
             categories_container.setPrefWidth(100);
             categories_container.setPrefHeight(70);
-            VBox mapp= (VBox) body.lookup("#map");
-            mapp.getChildren().add(map(addresses.get(0)));
+           // VBox mapp= (VBox) body.lookup("#map");
+           // mapp.getChildren().add(map(addresses.get(0)));
           
             Main.pane.setCenter(center);
         } catch (IOException ex) {
@@ -151,43 +151,45 @@ public class AddressController {
         }
         
     }
-       private GoogleMapView map(Address s)
-   { GoogleMap map=null;
-       GoogleMapView mapview = null; 
-      
-       //configureMap();
-          if(s != null)
-        {
-             MapOptions mapOptions = new MapOptions();//
-             
-             mapOptions.center(new LatLong(s.getLat(),  s.getLng()))
-            .mapType(MapTypeIdEnum.ROADMAP)
-            .overviewMapControl(false)
-            .panControl(false)
-            .rotateControl(false)
-            .scaleControl(false)
-            .streetViewControl(false)
-            .zoomControl(false)
-            .zoom(12);
-
-             map = mapview.createMap(mapOptions);
-
-    //Add a marker to the map
-            MarkerOptions markerOptions = new MarkerOptions();
-
-    markerOptions.position( new LatLong(s.getLat(),  s.getLng()) )
-                .visible(Boolean.TRUE)
-                .title("My Marker");
-
-    Marker marker = new Marker( markerOptions );
-
-    map.addMarker(marker);
-   
-   
-
 }
-             return mapview;
-}
-    }
+
+//       private GoogleMapView map(Address s)
+//   { GoogleMap map=null;
+//       GoogleMapView mapview = null; 
+//      
+//       //configureMap();
+//          if(s != null)
+//        {
+//             MapOptions mapOptions = new MapOptions();//
+//             
+//             mapOptions.center(new LatLong(s.getLat(),  s.getLng()))
+//            .mapType(MapTypeIdEnum.ROADMAP)
+//            .overviewMapControl(false)
+//            .panControl(false)
+//            .rotateControl(false)
+//            .scaleControl(false)
+//            .streetViewControl(false)
+//            .zoomControl(false)
+//            .zoom(12);
+//
+//             map = mapview.createMap(mapOptions);
+//
+//    //Add a marker to the map
+//            MarkerOptions markerOptions = new MarkerOptions();
+//
+//    markerOptions.position( new LatLong(s.getLat(),  s.getLng()) )
+//                .visible(Boolean.TRUE)
+//                .title("My Marker");
+//
+//    Marker marker = new Marker( markerOptions );
+//
+//    map.addMarker(marker);
+//   
+//   
+//
+//}
+//             return mapview;
+//}
+//    }
         
 

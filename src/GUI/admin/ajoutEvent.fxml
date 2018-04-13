@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="648.0" prefWidth="761.0" styleClass="container" stylesheets="@../../assets/css/admin-styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.admin.AjoutEventController">
+    <children>
+        <VBox prefHeight="607.0" prefWidth="693.0" styleClass="panel">
+            <children>
+                <HBox prefHeight="100.0" styleClass="panel-heading">
+                    <children>
+                        <Label fx:id="ajout" text="Ajout Evenement" />
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <VBox fx:id="panelBody" prefHeight="473.0" prefWidth="621.0" spacing="10.0" styleClass="panel-body">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Type :" />
+                        <TextField fx:id="type" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Sujet :" />
+                        <TextField fx:id="sujet" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Date début" />
+                        <DatePicker fx:id="dated" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                   <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Date fin :" />
+                        <DatePicker fx:id="datef" />
+                        
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="location" prefWidth="200.0" styleClass="form-label" text="Lieu:" />
+                        <TextField fx:id="lieu" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                      <children>
+                     <Label prefWidth="200.0" styleClass="form-label" text="Image :" />
+                        <Button fx:id="icon" mnemonicParsing="false" onMouseClicked="#ajouterimage" text="Choisir une image">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-default" />
+                           </styleClass>
+                          
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Nombres de participants:" />
+                        <TextField fx:id="participants" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Places disponibles :" />
+                        <TextField fx:id="dispo" prefHeight="32.0" prefWidth="86.0" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Age:" />
+                        <TextField fx:id="age" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="save" mnemonicParsing="false" onAction="#AjouterEvent" text="Ajouter">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-success" />
+                     </styleClass>
+                  </Button>
+               </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

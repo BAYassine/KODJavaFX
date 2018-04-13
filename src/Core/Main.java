@@ -3,6 +3,7 @@ package Core;
 import Controllers.HeaderController;
 import Controllers.IndexController;
 import Core.Exceptions.EmailInvalidException;
+import Entities.LigneCommande;
 import Entities.User;
 import Services.GameService;
 import Services.UserService;
@@ -22,6 +23,8 @@ import javafx.util.Duration;
 import javax.swing.*;
 import javax.swing.text.html.ImageView;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -33,6 +36,7 @@ public class Main extends Application {
     public static StackPane sp;
     public static User user = null;
     public static Scene scene;
+    public static List<LigneCommande> panier = new ArrayList();
 
     @Override
     public void start(Stage primaryStage) {

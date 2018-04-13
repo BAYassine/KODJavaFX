@@ -145,7 +145,6 @@ public class TeacherController {
 
          public void addprof(){
 
-  AdminController.treeView.getSelectionModel().select(3);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-teacher.fxml"));
@@ -195,11 +194,9 @@ public class TeacherController {
         }
         AdminController.container.getChildren().clear();
         AdminController.container.getChildren().add(content);
-       
     }
 
      private void updateTeacher(Integer id) {
-        AdminController.treeView.getSelectionModel().select(5);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-teacher.fxml"));

@@ -159,7 +159,7 @@ public class GamesController {
     }
 
     private void updateGame(Integer id) {
-        AdminController.treeView.getSelectionModel().select(4);
+
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-game.fxml"));
@@ -221,7 +221,7 @@ public class GamesController {
                 g.setCategory(category.getSelectionModel().getSelectedItem());
                 g.setGender(finalSelectedGender
             );
-            new GameService().addGame(g);
+            new GameService().updateGame(g);
             init();
             });
         } catch (IOException e) {
@@ -230,6 +230,8 @@ public class GamesController {
         AdminController.container.getChildren().clear();
         AdminController.container.getChildren().add(content);
     }
+
+
 
     public void addGame() {
         AdminController.treeView.getSelectionModel().select(4);

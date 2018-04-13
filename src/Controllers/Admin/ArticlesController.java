@@ -221,58 +221,53 @@ public class ArticlesController {
                 java.sql.Date dtSql = new java.sql.Date(date1.getTime());
                 Photo imageFile = new Photo(image);
                 Date datee = new Date(new java.util.Date().getTime());
-                if (!dtSql.before(datee)) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("ERREUR");
-                    alert.setHeaderText("Choix erronné");
-                    alert.setContentText("Veuillez saisir une date inférieure à aujourd'hui");
-                    alert.show();
-                    init();
-                    
-                    
-                    
-                }   else  if (description.getText().isEmpty()) {
+               
+                  
+                if (description.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Description vide");
                     alert.setContentText("Veuillez saisir une description");
-                    alert.show();
+                    alert.showAndWait();
                     
                 }
-               else   if (date.getEditor().getText().length() == 0 )
+               
+                if (date.getEditor().getText().length() == 0 )
                     
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Date vide");
                     alert.setContentText("Veuillez saisir une date");
-                    alert.show();
+                    alert.showAndWait();
                 }
                 
-               else   if (src.getText().isEmpty()) {
+              if (src.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Source vide");
                     alert.setContentText("Veuillez saisir une source");
-                    alert.show();  
+                    alert.showAndWait();  
                     
-                }  else  if (title.getText().isEmpty()) {
+                }  
+              if (title.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Titre vide");
                     alert.setContentText("Veuillez saisir un titre");
-                    alert.show();
+                    alert.showAndWait();
                     
                 }
                 
-                 else  if (subject.getText().isEmpty()) {
+                 if (subject.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Champ sujet vide");
                     alert.setContentText("Veuillez saisir un sujet");
-                    alert.show();
+                    alert.showAndWait();
                     
-                }  else  if (auteur.getText().isEmpty()) {
+                } 
+                 if (auteur.getText().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Champ auteur vide");
@@ -280,24 +275,36 @@ public class ArticlesController {
                     alert.show();
                     
                 }
-                 else  if (types.getSelectionModel().isEmpty())
+                 
+                 if (types.getSelectionModel().isEmpty())
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Sélectionnez un type yarham bouk");
                     alert.setContentText("Veuillez saisir un type");
-                    alert.show();
+                    alert.showAndWait();
                 }
-                else if (categories.getSelectionModel().isEmpty())
+                
+                 if (categories.getSelectionModel().isEmpty())
                 {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("ERREUR");
                     alert.setHeaderText("Sélectionnez un type yarham bouk");
                     alert.setContentText("Veuillez saisir une categorie");
-                    alert.show();
+                    alert.showAndWait();
                 }
                 
-                
+//                 if (dtSql.after(datee)) {
+//                    Alert alert = new Alert(Alert.AlertType.ERROR);
+//                    alert.setTitle("ERREUR");
+//                    alert.setHeaderText("Choix erronné");
+//                    alert.setContentText("Veuillez saisir une date inférieure à aujourd'hui");
+//                    alert.showAndWait();
+//                  
+//                    
+//                    
+//                    
+//                }
                 else {
                     
                     try {
@@ -307,7 +314,7 @@ public class ArticlesController {
                     alert.setTitle("Ajout réussi");
                     alert.setHeaderText("Article ajouté avec succès");
                     alert.setContentText("Ajout réussi");
-                    alert.show();
+                    alert.showAndWait();
                         init();
                         
                     } catch (SQLException ex) {
@@ -433,7 +440,7 @@ public class ArticlesController {
                 pieChartData.add(new PieChart.Data(k.getName(), v));
             });
             final PieChart chart = new PieChart(pieChartData);
-            chart.setTitle("Nombre de vues par article");
+            chart.setTitle("Nombre de vues d'articles par catégorie");
             chart.setLabelLineLength(10);
             chart.setLegendSide(Side.LEFT);
             pie.getChildren().add(chart);
@@ -444,5 +451,8 @@ public class ArticlesController {
         }
 
     }
-//     FXCollections.observableArrayList(new PieChart.Data(articles.get(i).getTitle()),Double.parseDouble(Integer.toString(articles.get(i).getViews())));
+
+   
+    
+    
 }

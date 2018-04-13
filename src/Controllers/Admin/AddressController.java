@@ -196,7 +196,7 @@ public class AddressController {
     }
     
    private void updateAddress(Integer id) {
-        AdminController.treeView.getSelectionModel().select(5);
+        //AdminController.treeView.getSelectionModel().select(5);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-address.fxml"));

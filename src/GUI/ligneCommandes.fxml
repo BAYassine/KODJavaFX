@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPane1" prefHeight="866.0" prefWidth="1329.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LigneCommandesController">
+   <children>
+      <ToggleButton mnemonicParsing="false" onAction="#afficher" prefHeight="40.0" prefWidth="35.0" styleClass="toggle" stylesheets="@css/accueilgeneral.css">
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/icon/menu1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <Text fill="#ffc014" layoutX="344.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ma wishlist" wrappingWidth="354.13671875">
+         <font>
+            <Font name="Baskerville" size="31.0" />
+         </font>
+      </Text>
+      <ListView fx:id="wishlist" layoutX="256.0" layoutY="160.0" prefHeight="784.0" prefWidth="1086.0" />
+      <ImageView fitHeight="39.0" fitWidth="59.0" layoutX="265.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/ios7-rewind-outline_icon-icons.com_50173.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="991.0" layoutY="2.0" minHeight="52.0" prefHeight="60.0" prefWidth="354.0" styleClass="box-topo" stylesheets="@css/covoiturage.css">
+         <children>
+            <TextField fx:id="search" maxHeight="44.0" onAction="#rechercherProduit" prefHeight="44.0" prefWidth="200.0" promptText="chercher par catégorie" style="-fx-border-color: #ffc014;" styleClass="pesquisar" stylesheets="@css/gestionevaluation.css">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <ToggleButton fx:id="rechercher" maxHeight="40.0" mnemonicParsing="false" onAction="#rechercherProduit" prefHeight="40.0" style="-fx-border-color: #ffc014;" stylesheets="@css/gestionevaluation.css" textFill="#a10f0f">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="pesquisar" />
+               </styleClass>
+            </ToggleButton>
+            <ToggleButton fx:id="supprimer" layoutX="1150.0" layoutY="27.0" mnemonicParsing="false" onAction="#supprimerProduit" style="-fx-border-color: #ffc014;" stylesheets="@css/gestionevaluation.css" text="">
+               <styleClass>
+                  <String fx:value="menus-tela" />
+                  <String fx:value="menu-excluir" />
+               </styleClass>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menu" />
+               </toggleGroup>
+            </ToggleButton>
+         </children>
+      </HBox>
+     
+    
+     
+   </children>
+</AnchorPane>

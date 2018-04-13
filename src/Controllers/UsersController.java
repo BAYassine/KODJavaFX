@@ -197,7 +197,7 @@ public class UsersController{
         signOutBtn.setPrefWidth(0);
         HBox profileHolder = (HBox) Main.scene.lookup("#profileHolder");
         profileHolder.setPrefWidth(0);
-        HBox adminLink = (HBox) Main.sp.lookup("#adminBtn");
+        HBox adminLink = (HBox) Main.sp.lookup("#adminLink");
         adminLink.setPrefWidth(0);
 
         loginLink.setPrefWidth(Region.USE_COMPUTED_SIZE);

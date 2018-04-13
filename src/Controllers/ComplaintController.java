@@ -109,11 +109,11 @@ public class ComplaintController {
        else  {
             Complaint comp = new Complaint(description.getText(), subject.getText(), date, "non_traitee", Main.user, cv.findByName(categories.getValue().toString()));
             cs.addComplaint(comp);
-                      try {
-                          showHistory();
-                      } catch (IOException ex) {
-                          Logger.getLogger(ComplaintController.class.getName()).log(Level.SEVERE, null, ex);
-                      }
+//                      try {
+//                          //showHistory();
+//                      } catch (IOException ex) {
+//                          Logger.getLogger(ComplaintController.class.getName()).log(Level.SEVERE, null, ex);
+//                      }
        }
                
 

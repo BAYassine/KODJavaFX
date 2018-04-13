@@ -1,25 +1,44 @@
 package Controllers.Admin;
 
 import Controllers.AdminController;
+import Core.Main;
+import Dependencies.pherialize.MixedArray;
+import Dependencies.pherialize.Pherialize;
+import Entities.Complaint;
 import Entities.Babysitter;
 import Entities.Category;
-import Entities.Complaint;
+import Entities.Game;
+import Entities.Photo;
 import Entities.User;
 import Services.ComplaintService;
+import Services.BabysitterService;
+import Services.CategoryService;
+import Services.GameService;
+import Services.UserService;
 import Services.sendmail;
-import javafx.collections.ObservableList;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
+
+import java.io.File;
+
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
 public class ComplaintController {
 
@@ -80,9 +99,8 @@ public class ComplaintController {
                         deleteBtn.setOnAction(e -> {
                             if ("traitee".equals(fcomplaints.get(index).getState())) {
                                 new ComplaintService().deleteObject(fcomplaints.get(index).getId(), "complaint");
-                                Alert alert = new Alert(Alert.AlertType.NONE);
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setTitle("Succès");
-                                //alert.setHeaderText("Impossible de supprimer cette réclamation");
                                 alert.setContentText("La réclamation a bien été supprimée");
                                 alert.showAndWait();
                                 init();

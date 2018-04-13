@@ -64,13 +64,14 @@ public class ArticlesController {
                 title.setText(articles.get(i).getTitle());
                 //description.setText(articles.get(i).getDescription());
 
-                WebView desc = (WebView) card.lookup("#desc");
-                desc.getEngine().loadContent(articles.get(i).getDescription());
-
+               
+               
+            Label desc = (Label) card.lookup("#desc");
+            desc.setText("Description: "+ articles.get(i).getDescription());
                 System.out.println(articles.get(i).getDescription());
 
-                subject.setText(articles.get(i).getSubject());
-                auteur.setText(articles.get(i).getAuteur());
+                subject.setText("Sujet: "+ articles.get(i).getSubject());
+                auteur.setText("Auteur: "+articles.get(i).getAuteur());
                 Button more = (Button) card.lookup("#more");
                 int finalI = i;
                 System.out.println(a.getId());
@@ -112,15 +113,15 @@ public class ArticlesController {
             body.setPrefWidth(Main.scene.getWidth());
             image = (ImageView) body.lookup("#image");
             image.setImage(new Image(articles.get(0).getPhoto().getWebPath()));
-            WebView desc = (WebView) body.lookup("#description");
-            desc.getEngine().loadContent(articles.get(0).getDescription());
-
+            Label desc = (Label) body.lookup("#desc");
+            desc.setText(articles.get(0).getDescription());
+            
             Label title = (Label) body.lookup("#title");
             Label subject = (Label) body.lookup("#subject");
             Label auteur = (Label) body.lookup("#auteur");
             title.setText(articles.get(0).getTitle());
-            subject.setText(articles.get(0).getSubject());
-            auteur.setText(articles.get(0).getAuteur());
+            subject.setText("Sujet: "+ articles.get(0).getSubject());
+            auteur.setText("Auteur: " + articles.get(0).getAuteur());
             ObservableList<Category> categories = cv.findCategory("Article");
             ListView<Category> categories_container = new ListView<Category>();
             categories_container = (ListView) body.lookup("#categories");

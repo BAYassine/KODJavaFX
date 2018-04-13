@@ -52,22 +52,47 @@ public class GameService extends Service {
     }
 
     public void updateGame(Game g){
-        String sql =
-                "UPDATE game " +
-                "SET icon_id=?, name=?, url=?, age=?, device=?, category_id=?, gender=? " +
-                "WHERE game.id = ?";
+        String photoText = "";
+        String sqlPhoto = "INSERT INTO photos (url, alt) "
+                + "VALUES (?,?)";
+        
         try {
-            PreparedStatement ps = this.connection.prepareStatement(sql);
-            ps.setInt(1, g.getIcon().getId());
-            ps.setString(2, g.getName());
-            ps.setString(3, g.getUrl());
-            ps.setInt(4, g.getAge());
-            ps.setString(5, g.getDevice());
-            ps.setInt(6, g.getCategory().getId());
-            ps.setInt(7, g.getGender());
-            ps.setInt(8, g.getId());
-            ps.executeUpdate();
-            System.out.println("Le jeu a été modifié avec succes");
+            PreparedStatement ps = null;
+            if (g.getIcon() != null) {
+                ps = this.connection.prepareStatement(sqlPhoto, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, g.getIcon().getUrl());
+                ps.setString(2, g.getIcon().getAlt());
+                ps.executeUpdate();
+                int photoId = 0;
+                ResultSet rs = ps.getGeneratedKeys();
+                while (rs.next()) {
+                    photoId = rs.getInt(1);
+                }
+                System.out.println();
+                g.getIcon().setId(photoId);
+                photoText = ",image_id=? ";
+            }
+
+            String sql
+                    = "UPDATE game "
+                    + "SET name=?, url=?, age=?, device=?, category_id=?, gender=?, id=?" + photoText
+                    + "WHERE game.id = ?";
+            PreparedStatement ps1 = this.connection.prepareStatement(sql);
+            ps1.setString(1, g.getName());
+            ps1.setString(2, g.getUrl());
+            ps1.setInt(3, g.getAge());
+            ps1.setString(4, g.getDevice());
+            ps1.setInt(5, g.getCategory().getId());
+            ps1.setInt(6, g.getGender());
+            ps1.setInt(7, g.getId());
+            if (g.getIcon() != null) {
+                ps.setInt(8, g.getIcon().getId());
+                ps.setInt(9, g.getId());
+                g.getIcon().moveToServer();
+            } else {
+                ps.setInt(9, g.getId());
+            }
+            ps1.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

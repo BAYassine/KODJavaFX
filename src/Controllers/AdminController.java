@@ -82,16 +82,16 @@ public class AdminController {
             fa = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
             schools.setGraphic(fa);
             schools.setExpanded(true);
-
-            TreeItem<String> videos = new TreeItem<>("Liste des videos");
-            fa = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
-            videos.setGraphic(fa);
-            videos.setExpanded(true);
-
-            TreeItem<String> addvideo = new TreeItem<>("Ajouter une video");
-            fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
-            addvideo.setGraphic(fa);
-            videos.getChildren().add(addvideo);
+//
+//            TreeItem<String> videos = new TreeItem<>("Liste des videos");
+//            fa = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
+//            videos.setGraphic(fa);
+//            videos.setExpanded(true);
+//
+//            TreeItem<String> addvideo = new TreeItem<>("Ajouter une video");
+//            fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
+//            addvideo.setGraphic(fa);
+//            videos.getChildren().add(addvideo);
 
             TreeItem<String> addschool = new TreeItem<>("Ajouter une ecole");
             fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
@@ -110,16 +110,32 @@ public class AdminController {
             fa = new FontAwesomeIconView(FontAwesomeIcon.LIST);
             articles.setGraphic(fa);
 
+            TreeItem<String> products = new TreeItem<>("Liste des produits");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.SHOPPING_BAG);
+            products.setGraphic(fa);
+            products.setExpanded(true);
+
             fa = new FontAwesomeIconView(FontAwesomeIcon.MUSIC);
             songs.setGraphic(fa);
             songs.setExpanded(true);
+
+            TreeItem<String> addevent = new TreeItem<>("Ajouter un event");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+            addevent.setGraphic(fa);
+
+            TreeItem<String> updateevent = new TreeItem<>("Modifier un event");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
+            updateevent.setGraphic(fa);
+
+            users.setExpanded(true);
 
             TreeItem<String> root = new TreeItem<>();
 
             root.setExpanded(true);
             root.setGraphic(null);
 
-            root.getChildren().addAll(dashboard, users, games,songs,enseignant,schools,videos, babysitters, addresses, articles, complaints);
+            root.getChildren().addAll(dashboard, users, games,songs,enseignant,schools, babysitters, addresses, articles, complaints);
+            root.getChildren().addAll(addevent,updateevent, products);
             treeView.setRoot(root);
             treeView.setShowRoot(false);
             treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -148,13 +164,13 @@ public class AdminController {
                     case "Ajouter une ecole":
                         new Controllers.Admin.EtablissementController().addecole();
                         break;
-                    case "Liste des videos":
-                        new VideoEDUController().init();
-                        break;
-                    case "Ajouter une video":
-                        new Controllers.Admin.EtablissementController().addecole();
-                        break;
-                    case "ajout un enseignant":
+//                    case "Liste des videos":
+//                        new VideoEDUController().init();
+//                        break;
+//                    case "Ajouter une video":
+//                        new Controllers.Admin.EtablissementController().addecole();
+//                        break;
+                    case "Ajouter un enseignant":
                         new Controllers.Admin.TeacherController().addprof();
                         break;
                     case "Babysitters":
@@ -168,6 +184,15 @@ public class AdminController {
                         break;
                     case "Reclamations":
                         new Controllers.Admin.ComplaintController().init();
+                        break;
+                    case "Liste des produits":
+                        new Controllers.Admin.ProduitsController().init();
+                        break;
+                    case "Ajouter un event":
+                        new Controllers.Admin.EventController().addEvent();
+                        break;
+                    case "Modifier un event":
+                        new Controllers.Admin.EventController().updateEvent(18);
                         break;
                 }
             });

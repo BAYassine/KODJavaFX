@@ -196,4 +196,9 @@ public class User {
             return this.userInfos.getFirstname() + " " + this.userInfos.getLastname();
         return username;
     }
+
+    @Override
+    public String toString(){
+        return getFullname();
+    }
 }

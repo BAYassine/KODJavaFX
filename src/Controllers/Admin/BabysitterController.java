@@ -132,7 +132,7 @@ public class BabysitterController {
     public void addBabysitter() {
 
         try {
-            AdminController.treeView.getSelectionModel().select(3);
+           // AdminController.treeView.getSelectionModel().select(3);
             VBox content = null;
             BabysitterService bs = new BabysitterService();
 
@@ -149,8 +149,11 @@ public class BabysitterController {
             address.setVisibleRowCount(25);
 
             address.getItems().addAll("Ariana", "Ben Arous", "Mahdia", "Gabes", "Sousse");
+    ComboBox etats = (ComboBox) content.lookup("#state");
+            etats.setVisibleRowCount(25);
 
-            ComboBox<String> etat = (ComboBox) content.lookup("#state");
+            etats.getItems().addAll("libre", "occupe");
+            
 
             Button save = (Button) content.lookup("#save");
             Button icon = (Button) content.lookup("#icon");
@@ -160,13 +163,24 @@ public class BabysitterController {
             fc.setSelectedExtensionFilter(fe);
             icon.setOnAction(e -> image = fc.showOpenDialog(Main.window));
             save.setOnAction(e -> {
-
+  
                 Photo imageFile = new Photo(image);
-                Babysitter u = new Babysitter(prenom.getText(), nom.getText(),
-                        address.getValue().toString(), Integer.parseInt(salaire.getText()), telephone.getText(), etat.getSelectionModel().getSelectedItem(), imageFile);
+                if ((!(telephone.getText().matches("[0-9]+"))) || telephone.getText().isEmpty() || telephone.getText().length() != 8)
+                {
+                     Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERREUR");
+                    alert.setHeaderText("Téléphone invalide");
+                    alert.setContentText("Veuillez saisir un numéro de téléphone valide");
+                    alert.showAndWait();
+                }
+                else
+                {
+                         Babysitter u = new Babysitter(prenom.getText(), nom.getText(), address.getValue().toString(), Integer.parseInt(salaire.getText()), telephone.getText(), etats.getValue().toString(), imageFile);
 
                 new BabysitterService().addBabysitter(u);
                 init();
+                }
+           
 
             });
 
@@ -178,7 +192,7 @@ public class BabysitterController {
     }
 
     private void updateBabysitter(Integer id) {
-        AdminController.treeView.getSelectionModel().select(5);
+        //AdminController.treeView.getSelectionModel().select(5);
         VBox content = null;
         try {
             content = FXMLLoader.load(getClass().getResource("/GUI/admin/form-babysitter.fxml"));
@@ -201,9 +215,9 @@ public class BabysitterController {
             address.setVisibleRowCount(25);
             address.getItems().addAll("Ariana", "Ben Arous", "Mahdia", "Gabes", "Sousse");
             address.setValue(g.getAddress());
-            ComboBox states = (ComboBox) content.lookup("#state");
+           ComboBox states = (ComboBox) content.lookup("#state");
             states.setVisibleRowCount(25);
-            states.getItems().addAll("Occupée", "Libre");
+            states.getItems().addAll("occupe", "libre");
             states.setValue(g.getState());
 
             Button icon = (Button) content.lookup("#icon");
@@ -226,6 +240,7 @@ public class BabysitterController {
                     g.setAddress(address.getValue().toString());
                     g.setFirstName(prenom.getText());
                     g.setLastName(nom.getText());
+                    
                     g.setPhone(telephone.getText());
                     g.setPrice(Integer.parseInt(salaire.getText()));
                     g.setState(states.getValue().toString());
