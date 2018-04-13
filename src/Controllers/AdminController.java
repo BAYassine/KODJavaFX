@@ -2,6 +2,7 @@ package Controllers;
 
 import Controllers.Admin.GamesController;
 import Controllers.Admin.MusicController;
+import Controllers.Admin.VideoEDUController;
 import Core.Main;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -27,6 +28,7 @@ public class AdminController {
         try {
             layer = FXMLLoader.load(getClass().getResource("/GUI/admin.fxml"));
             ScrollPane navigator = (ScrollPane) layer.getChildren().get(0);
+            navigator.setPrefHeight(Main.scene.getHeight());
             ScrollPane rightPane = (ScrollPane) layer.getChildren().get(1);
             Button homeBtn = (Button) navigator.getContent().lookup("#home");
             HBox finalLayer = layer;
@@ -70,6 +72,44 @@ public class AdminController {
             games.getChildren().addAll(listGames, addGame);
 
             TreeItem<String> songs = new TreeItem<>("Liste des chansons");
+
+            TreeItem<String> enseignant = new TreeItem<>("Liste des enseignants");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
+            enseignant.setGraphic(fa);
+            enseignant.setExpanded(true);
+
+            TreeItem<String> schools = new TreeItem<>("Liste des ecoles");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
+            schools.setGraphic(fa);
+            schools.setExpanded(true);
+
+            TreeItem<String> videos = new TreeItem<>("Liste des videos");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.USER_PLUS);
+            videos.setGraphic(fa);
+            videos.setExpanded(true);
+
+            TreeItem<String> addvideo = new TreeItem<>("Ajouter une video");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
+            addvideo.setGraphic(fa);
+            videos.getChildren().add(addvideo);
+
+            TreeItem<String> addschool = new TreeItem<>("Ajouter une ecole");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
+            addschool.setGraphic(fa);
+            schools.getChildren().add(addschool);
+
+            TreeItem<String> addenseignant = new TreeItem<>("Ajouter un enseignant");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.PLUS_SQUARE);
+            addenseignant.setGraphic(fa);
+            enseignant.getChildren().add(addenseignant);
+            TreeItem<String> babysitters = new TreeItem<>("Babysitters");
+            TreeItem<String> complaints = new TreeItem<>("Reclamations");
+            TreeItem<String> addresses = new TreeItem<>("Adresses");
+            addresses.setGraphic(fa);
+            TreeItem<String> articles = new TreeItem<>("Articles");
+            fa = new FontAwesomeIconView(FontAwesomeIcon.LIST);
+            articles.setGraphic(fa);
+
             fa = new FontAwesomeIconView(FontAwesomeIcon.MUSIC);
             songs.setGraphic(fa);
             songs.setExpanded(true);
@@ -79,7 +119,7 @@ public class AdminController {
             root.setExpanded(true);
             root.setGraphic(null);
 
-            root.getChildren().addAll(dashboard, users, games,songs);
+            root.getChildren().addAll(dashboard, users, games,songs,enseignant,schools,videos, babysitters, addresses, articles, complaints);
             treeView.setRoot(root);
             treeView.setShowRoot(false);
             treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -99,8 +139,39 @@ public class AdminController {
                     case "Liste des chansons":
                         new MusicController().init();
                         break;
+                    case "Liste des enseignants":
+                        new Controllers.Admin.TeacherController().init();
+                        break;
+                    case "Liste des ecoles":
+                        new Controllers.Admin.EtablissementController().init();
+                        break;
+                    case "Ajouter une ecole":
+                        new Controllers.Admin.EtablissementController().addecole();
+                        break;
+                    case "Liste des videos":
+                        new VideoEDUController().init();
+                        break;
+                    case "Ajouter une video":
+                        new Controllers.Admin.EtablissementController().addecole();
+                        break;
+                    case "ajout un enseignant":
+                        new Controllers.Admin.TeacherController().addprof();
+                        break;
+                    case "Babysitters":
+                        new Controllers.Admin.BabysitterController().init();
+                        break;
+                    case "Adresses":
+                        new Controllers.Admin.AddressController().init();
+                        break;
+                    case "Articles":
+                        new Controllers.Admin.ArticlesController().init();
+                        break;
+                    case "Reclamations":
+                        new Controllers.Admin.ComplaintController().init();
+                        break;
                 }
             });
+            treeView.setPrefHeight(Main.sp.getHeight());
             sidebar.getChildren().add(treeView);
 
 

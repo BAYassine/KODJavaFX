@@ -2,6 +2,5 @@
 
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="230.0" minWidth="230.0" style="-fx-background-radius: 5px;"
-      styleClass="header-dropdown" stylesheets="@../assets/css/styles.css" xmlns="http://javafx.com/javafx/8.0.141"
-      xmlns:fx="http://javafx.com/fxml/1"/>
+
+<VBox maxHeight="-Infinity" maxWidth="230.0" minWidth="230.0" pickOnBounds="false" style="-fx-background-radius: 5px;" styleClass="header-dropdown" stylesheets="@../assets/css/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" />

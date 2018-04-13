@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="619.0" prefWidth="755.0" styleClass="container" stylesheets="@../../assets/css/admin-styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox styleClass="panel">
+            <children>
+                <HBox prefHeight="173.0" prefWidth="653.0" styleClass="panel-heading">
+                    <children>
+                        <Label text="Ajouter une video" />
+                        <Region prefHeight="26.0" prefWidth="216.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <VBox fx:id="panelBody" prefHeight="518.0" prefWidth="653.0" spacing="10.0" styleClass="panel-body">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="votre url" />
+                        <TextField fx:id="url" prefHeight="32.0" prefWidth="401.0" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="date" />
+                        <DatePicker fx:id="date" />
+                     </children>
+                  </HBox>
+                  <Button fx:id="save" mnemonicParsing="false" text="Ajouter">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-success" />
+                     </styleClass>
+                  </Button>
+               </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.lynden.gmapsfx.GoogleMapView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="clear" prefHeight="676.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MaprechercheController">
+    <children>
+      <GoogleMapView fx:id="googleMapView" layoutX="473.0" layoutY="303.0" prefHeight="334.0" prefWidth="562.0" />
+      <AnchorPane layoutX="33.0" layoutY="135.0" prefHeight="38.0" prefWidth="655.0" style="-fx-background-color: D8D8D8;">
+         <children>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="248.0" layoutY="12.0" prefHeight="25.0" prefWidth="59.0" text="Latitude :">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="latitudeLabel" alignment="CENTER_RIGHT" contentDisplay="LEFT" layoutX="307.0" layoutY="16.0" prefHeight="18.0" prefWidth="92.0">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="412.0" layoutY="13.0" text="Longitude :">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="longitudeLabel" alignment="CENTER_RIGHT" contentDisplay="LEFT" layoutX="491.0" layoutY="15.0" prefHeight="18.0" prefWidth="92.0">
+               <font>
+                  <Font name="Comic Sans MS" size="12.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="save" layoutX="592.0" layoutY="6.0" onAction="#addposition" style="-fx-background-color: ff214f; -fx-text-fill: white;" text="ecole" />
+            <TextField fx:id="address" layoutX="66.0" onAction="#search" prefHeight="31.0" prefWidth="147.0" promptText="votre address" />
+         </children>
+      </AnchorPane>
+      <HBox layoutX="21.0" layoutY="10.0" prefHeight="47.0" prefWidth="702.0" styleClass="panel-heading">
+         <children>
+            <Label prefHeight="42.0" prefWidth="1169.0" stylesheets="@../assets/css/styles.css" text="votre ecole ?">
+               <styleClass>
+                  <String fx:value="bdr-color-7" />
+                  <String fx:value="header-icon" />
+               </styleClass></Label>
+            <Region prefHeight="26.0" prefWidth="216.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <ImageView fitHeight="426.0" fitWidth="574.0" layoutX="475.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/images/boy.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="50.0" layoutY="288.0" prefHeight="64.0" prefWidth="359.0">
+         <children>
+            <Label stylesheets="@../assets/css/styles.css" text="nom de votre ecole ?">
+               <styleClass>
+                  <String fx:value="btn-primary" />
+                  <String fx:value="bdr-color-1" />
+               </styleClass>
+            </Label>
+            <TextField />
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

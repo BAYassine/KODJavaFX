@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="297.0" stylesheets="@../assets/css/styles.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="image" fitHeight="200.0" fitWidth="298.0" pickOnBounds="true" preserveRatio="true" styleClass="card-image" />
+      <Label fx:id="name" prefHeight="17.0" prefWidth="314.0" />
+      <Label fx:id="location" prefHeight="17.0" prefWidth="367.0" />
+      <Label fx:id="description" prefHeight="17.0" prefWidth="348.0" />
+      <Button fx:id="more" mnemonicParsing="false" text="More" />
+   </children>
+   <styleClass>
+      <String fx:value="card" />
+      <String fx:value="card-body" />
+      <String fx:value="bg-color-4" />
+   </styleClass>
+</VBox>

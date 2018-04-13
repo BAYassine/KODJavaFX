@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox id="AnchorPane" prefHeight="748.0" prefWidth="1156.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="img" fitHeight="259.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox prefHeight="748.0" prefWidth="707.0">
+         <children>
+            <Label graphicTextGap="13.0" style="-fx-font-style: red;" text="Information D'enseignant" textFill="#ea7066" textOverrun="CLIP">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label prefHeight="54.0" prefWidth="725.0" styleClass="bg-color-1" stylesheets="@../assets/css/styles.css" text="NOM" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="name" prefHeight="21.0" prefWidth="403.0" text="name" />
+            <Label prefHeight="57.0" prefWidth="711.0" styleClass="bg-color-2" stylesheets="@../assets/css/styles.css" text="DEGRÉ" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="name1" prefHeight="21.0" prefWidth="403.0" text="name" />
+            <Label prefHeight="55.0" prefWidth="710.0" styleClass="bg-color-3" stylesheets="@../assets/css/styles.css" text="EXPÉRIENCE" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="name2" prefHeight="21.0" prefWidth="403.0" text="name" />
+            <Label prefHeight="57.0" prefWidth="708.0" styleClass="bg-color-4" stylesheets="@../assets/css/styles.css" text="LOISIRS" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="name3" prefHeight="21.0" prefWidth="403.0" text="name" />
+            <Label prefHeight="67.0" prefWidth="708.0" styleClass="bg-color-5" stylesheets="@../assets/css/styles.css" text="MON COURS" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="name4" prefHeight="21.0" prefWidth="403.0" text="name" />
+         </children>
+      </VBox>
+   </children>
+</HBox>

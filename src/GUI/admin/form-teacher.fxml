@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="676.0" prefWidth="691.0" styleClass="container" stylesheets="@../../assets/css/admin-styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox styleClass="panel">
+            <children>
+                <HBox prefHeight="100.0" styleClass="panel-heading">
+                    <children>
+                        <Label prefHeight="25.0" prefWidth="133.0" text="Ajouter un prof" />
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <VBox fx:id="panelBody" prefHeight="536.0" prefWidth="589.0" spacing="10.0" styleClass="panel-body">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Subject" />
+                        <ComboBox fx:id="subject" prefHeight="30.0" prefWidth="219.0" promptText="Choisir une matière" styleClass="input" />
+                        <FontAwesomeIconView fx:id="subjectw" fill="RED" fontSmoothingType="LCD" glyphName="WARNING" size="20" visible="false" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="prenom prof" />
+                        <TextField fx:id="prenom" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="nom prof" />
+                        <TextField fx:id="nom" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="114.0" prefHeight="29.0" prefWidth="507.0">
+                     <Label prefWidth="200.0" styleClass="form-label" text="photo prof" />
+                     <Button fx:id="icon" mnemonicParsing="false" text="Choisir une image">
+                        <styleClass>
+                           <String fx:value="btn" />
+                           <String fx:value="btn-default" />
+                        </styleClass>
+                        <graphic>
+                           <FontAwesomeIconView glyphName="IMAGE" />
+                        </graphic>
+                     </Button>
+                  </HBox>
+                  <HBox prefHeight="35.0" prefWidth="529.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="lien facebook prof" />
+                        <TextField fx:id="lien" prefHeight="32.0" prefWidth="330.0" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="32.0" prefWidth="529.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="numero telephone du prof" />
+                        <TextField fx:id="num" prefHeight="32.0" prefWidth="303.0" styleClass="input" />
+                        <FontAwesomeIconView fx:id="phonew" fill="RED" fontSmoothingType="LCD" glyphName="WARNING" size="20" visible="false" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="28.0" prefWidth="529.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="degree du prof" />
+                        <TextField fx:id="degree" prefHeight="32.0" prefWidth="330.0" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="36.0" prefWidth="529.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="experience" />
+                        <TextField fx:id="exp" prefHeight="32.0" prefWidth="330.0" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="hobbies" />
+                        <TextField fx:id="hob" prefHeight="32.0" prefWidth="325.0" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="prix" />
+                        <TextField fx:id="prix" prefHeight="32.0" prefWidth="334.0" styleClass="input" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" layoutX="40.0" layoutY="156.0">
+                     <children>
+                        <Button fx:id="save" mnemonicParsing="false" text="Ajouter">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

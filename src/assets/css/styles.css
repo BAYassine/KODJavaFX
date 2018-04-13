@@ -8,6 +8,7 @@
 }
 
 .button{
+    -fx-background-color: none;
     -fx-font-size: 14px;
     -fx-font-family: 'Open Sans', sans-serif;
     -fx-cursor: hand;
@@ -717,4 +718,20 @@
 .btn.question-btn:hover{
     -fx-background-color: b5d56a;
     -fx-text-fill: white;
+}
+
+.apropos-btn{
+    -fx-background-color: none;
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.apropos-btn:hover{
+    -fx-text-fill: #ea7066;
+}
+
+.teacher-list{
+    -fx-background-image: url("../images/home/pattern-light.png");
+    -fx-background-color: #a597e7;
 }

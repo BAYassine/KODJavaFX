@@ -15,6 +15,36 @@ public class Teacher {
     private Photo photo;
     private Subject subject;
 
+    public Teacher(int id, String name, String lastname, double price, String account, int phone, String degree, String experience, String hobbies, Photo photo) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.price = price;
+        this.account = account;
+        this.phone = phone;
+        this.degree = degree;
+        this.experience = experience;
+        this.hobbies = hobbies;
+        this.photo = photo;
+    }
+
+    public Teacher(String name, String lastname, double price, String account, int phone, String degree, String experience, String hobbies, Photo photo, Subject subject) {
+        this.name = name;
+        this.lastname = lastname;
+        this.price = price;
+        this.account = account;
+        this.phone = phone;
+        this.degree = degree;
+        this.experience = experience;
+        this.hobbies = hobbies;
+        this.photo = photo;
+        this.subject = subject;
+    }
+
+    public Teacher() {
+
+    }
+
     public int getId() {
         return id;
     }

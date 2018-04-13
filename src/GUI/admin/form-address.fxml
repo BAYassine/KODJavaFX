@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox styleClass="container" stylesheets="@../../assets/css/admin-styles.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox styleClass="panel">
+            <children>
+                <HBox prefHeight="100.0" styleClass="panel-heading">
+                    <children>
+                        <Label text="Ajouter une adresse" />
+                        <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <VBox fx:id="panelBody" spacing="10.0" styleClass="panel-body">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Nom :" />
+                        <TextField fx:id="name" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Description :" />
+                        <TextField fx:id="description" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Adresse :" />
+                        <TextField fx:id="address" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Téléphone:" />
+                        <TextField fx:id="phone" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                   <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Latitude:" />
+                        <TextField fx:id="lat" styleClass="input" HBox.hgrow="ALWAYS" />
+                        
+                     </children>
+                  </HBox>
+                   <HBox alignment="CENTER_LEFT">
+                   <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Longitude:" />
+                        <TextField fx:id="lng" styleClass="input" HBox.hgrow="ALWAYS" />
+                        
+                     </children>
+                  </HBox>
+                 
+                  <HBox alignment="CENTER_LEFT">
+                      <children>
+                     <Label prefWidth="200.0" styleClass="form-label" text="Image:" />
+                        <Button fx:id="icon" mnemonicParsing="false" text="Choisir une image">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-default" />
+                           </styleClass>
+                          
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Categorie:" />
+                         <ComboBox fx:id="category" prefHeight="32.0" prefWidth="177.0" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <!--HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="114.0">
+                     <children>
+                        <Label prefWidth="200.0" styleClass="form-label" text="Privilèges :" />
+                        <ComboBox fx:id="roles" styleClass="input" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox!-->
+                  <HBox alignment="CENTER_RIGHT" layoutX="40.0" layoutY="156.0">
+                     <children>
+                        <Button fx:id="save" mnemonicParsing="false" text="Ajouter">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-success" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

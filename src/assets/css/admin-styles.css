@@ -247,3 +247,19 @@
     -fx-background-color: #2f3c43;
 
 }
+
+.combo-box-popup > .list-view {
+    -fx-pref-width: 150;
+}
+
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #6059EE;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base,-45%);
+}
